@@ -1,0 +1,18 @@
+# @from pku_t1_2.py
+    def sep_line(self, data=[], sep_line='。！？...', sep_col=None, pos=0):
+        ''' 分割list结构的篇章为两级list '''
+        if len(data)==0 and len(self.list)==0:
+            return False
+        res = []
+        if data : temp = data
+        else:     temp = self.list
+        # 需先进行列拆分,取pos段
+        temp = [ i.split(sep_col)[pos] for i in temp ]
+        begp = 0
+        for i in range(1,len(temp)):
+            w = temp[i]
+            if w in sep_line:           # 句子结尾符
+                res.append(temp[begp:i+1])
+                begp = i+1
+        res.append(temp[begp:])    # 添加残留尾句
+        return res
